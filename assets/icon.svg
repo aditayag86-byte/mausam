@@ -1,17 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 32 32" role="img" aria-label="Mausam — weather app icon">
-  <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#6FA9D8"/>
-      <stop offset="1" stop-color="#DCE8F0"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" fill="url(#sky)"/>
-  <g fill="#FFFFFF" opacity="0.9">
-    <ellipse cx="7.4" cy="7" rx="6" ry="4.2"/>
-    <ellipse cx="25.5" cy="25" rx="7" ry="4.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="528" height="528" viewBox="0 0 528 528" role="img" aria-label="Mausam — weather app icon">
+  <!-- coral background -->
+  <rect width="528" height="528" fill="#FB5252"/>
+  <!-- phone body -->
+  <rect x="40" y="6" width="448" height="516" rx="38" fill="#3F3D56"/>
+  <!-- notch -->
+  <rect x="236" y="12" width="56" height="12" rx="6" fill="#2E2C47"/>
+  <!-- screen -->
+  <rect x="64" y="30" width="400" height="468" rx="22" fill="#F4FBFE"/>
+  <!-- top wave (light blue) with wavy bottom edge -->
+  <path d="M64 30 H464 V132 C 396,176 318,104 232,158 C 168,196 108,182 64,166 Z" fill="#A9DEF2"/>
+  <!-- signal bars -->
+  <rect x="92" y="58" width="12" height="22" rx="6" fill="#D9F1FC"/>
+  <rect x="112" y="50" width="12" height="30" rx="6" fill="#D9F1FC"/>
+  <rect x="132" y="42" width="12" height="38" rx="6" fill="#D9F1FC"/>
+  <!-- top-right pill -->
+  <rect x="396" y="52" width="46" height="18" rx="9" fill="#D9F1FC"/>
+  <!-- sun rays -->
+  <g stroke="#FFC93C" stroke-width="11" stroke-linecap="round">
+    <path d="M225 105 V 78"/><path d="M225 245 V 218" opacity="0"/>
+    <path d="M155 175 H 128"/><path d="M295 175 H 268" opacity="0"/>
+    <path d="M172 122 L 153 103"/><path d="M278 122 L 297 103"/>
+    <path d="M172 228 L 153 247" opacity="0"/><path d="M278 228 L 297 247" opacity="0"/>
   </g>
-  <g stroke="#F2B63F" stroke-width="1.4" stroke-linecap="square" opacity="0.9">
-    <path d="M20.5 13.5 l6.2 0 M20.5 13.5 l-6.2 0 M20.5 13.5 l0 6.2 M20.5 13.5 l0 -6.2 M20.5 13.5 l4.4 4.4 M20.5 13.5 l-4.4 4.4 M20.5 13.5 l4.4 -4.4 M20.5 13.5 l-4.4 -4.4"/>
+  <!-- sun -->
+  <circle cx="225" cy="175" r="44" fill="#FFD93B"/>
+  <circle cx="237" cy="163" r="17" fill="#FFE97A" opacity="0.85"/>
+  <!-- big right cloud -->
+  <g fill="#4FB3E8">
+    <circle cx="300" cy="248" r="42"/>
+    <circle cx="345" cy="230" r="52"/>
+    <circle cx="392" cy="252" r="38"/>
+    <rect x="268" y="240" width="158" height="52" rx="26"/>
   </g>
-  <circle cx="20.5" cy="13.5" r="6.4" fill="#FFD75E"/>
+  <circle cx="352" cy="216" r="30" fill="#9BD7F2"/>
+  <!-- small left cloud -->
+  <g fill="#B5E3F7">
+    <circle cx="172" cy="268" r="28"/>
+    <circle cx="205" cy="262" r="34"/>
+    <rect x="140" y="262" width="98" height="40" rx="20"/>
+  </g>
+  <!-- °C -->
+  <circle cx="312" cy="330" r="11" fill="none" stroke="#4DA8DA" stroke-width="9"/>
+  <path d="M 388 332 A 34 34 0 1 0 388 398" fill="none" stroke="#4DA8DA" stroke-width="13" stroke-linecap="round"/>
+  <!-- text lines -->
+  <rect x="150" y="340" width="120" height="16" rx="8" fill="#C9E9F8"/>
+  <rect x="150" y="372" width="96" height="14" rx="7" fill="#D6EEFA"/>
+  <rect x="150" y="402" width="110" height="14" rx="7" fill="#D6EEFA"/>
+  <!-- green button -->
+  <rect x="196" y="448" width="152" height="44" rx="22" fill="#A6D93E"/>
+  <path d="M272 448 h54 a22 22 0 0 1 22 22 a22 22 0 0 1 -22 22 h-54 Z" fill="#8FC22F"/>
 </svg>
