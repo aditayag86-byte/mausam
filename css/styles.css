@@ -227,6 +227,21 @@ button { font-family: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .mono-note { font-size: 16px; color: rgba(255,255,255,.55); }
 .solid .mono-note { color: var(--text-secondary); }
+/* PWA install banner (first-visit "install" popup) */
+.install-card {
+  position: fixed; z-index: 85; left: 12px; right: 12px;
+  bottom: calc(78px + env(safe-area-inset-bottom));
+  display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+  background: var(--surface-strong); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 2px solid var(--edge); border-radius: var(--radius); box-shadow: var(--shadow); color: #fff;
+}
+.install-card .ikin { font-size: 26px; line-height: 1; }
+.install-card .icopy { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0; }
+.install-card .icopy b { font-size: 19px; }
+.install-card .icopy span { font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.25; }
+.install-hints { margin-top: 8px; border-top: 2px solid var(--edge); display: flex; flex-direction: column; gap: 2px; }
+.install-hints p { margin: 0; }
+@media (min-width: 700px) { .install-card { bottom: 18px; left: auto; right: 18px; max-width: 400px; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   #sky .sky-stars span { opacity: .8; }

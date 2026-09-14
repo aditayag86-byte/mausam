@@ -162,6 +162,61 @@ function removeLoc(id) {
 function addPointLocation(lat, lon, name) {
   upsertLoc({ id: locId(lat, lon), name, region: '', lat, lon, timezone: 'Asia/Kolkata', isCurrentLocation: false });
 }
+
+/* ---------- PWA install banner (first-visit "install" popup; manifest.json) ---------- */
+const INSTALL_FLAG = 'mausam:install-dismissed';
+let installPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); installPrompt = e; }, { once: true });
+
+function appInstalled() {
+  try {
+    if (navigator.standalone === true) return true;                                  // iOS/Safari & some desktops
+    if (matchMedia('(display-mode: standalone)').matches) return true;               // Android Chrome installed
+  } catch { /* treat as not installed */ }
+  return false;
+}
+function maybeShowInstall() {
+  if (appInstalled()) return;
+  try { if (localStorage.getItem(INSTALL_FLAG)) return; } catch { /* show anyway */ }
+  setTimeout(() => {
+    const t2 = makeT(store.lang);
+    const card = V.h('div', { class: 'install-card', role: 'dialog', 'aria-label': t2('install_title') },
+      V.h('span', { class: 'ikin', 'aria-hidden': 'true' }, '📲'),
+      V.h('div', { class: 'icopy' },
+        V.h('b', {}, t2('install_title')),
+        V.h('span', {}, t2('install_desc'))),
+      V.h('button', { type: 'button', class: 'pillbtn install-go' }, t2('install_btn')),
+      V.h('button', { type: 'button', class: 'minibtn', 'aria-label': t2('install_later') }, '✕'));
+    const go = () => {
+      if (installPrompt && typeof installPrompt.prompt === 'function') {
+        try { installPrompt.prompt(); } catch { /* fall through to hints */ }
+      } else {
+        toast(t2('install_note'), 5000);
+      }
+    };
+    card.querySelector('.install-go').addEventListener('click', () => {
+      try { localStorage.setItem(INSTALL_FLAG, String(Date.now())); } catch { /* ignore */ }
+      toast(t2('install_done'), 5000);
+      go();
+      card.remove();
+    });
+    card.querySelector('.minibtn').addEventListener('click', () => {
+      try { localStorage.setItem(INSTALL_FLAG, String(Date.now())); } catch { /* ignore */ }
+      card.remove();
+    });
+    // platform-specific steps, keyboard-accessible at all times
+    const hintsBtn = V.h('button', { type: 'button', class: 'locbtn', style: 'font-size:17px;padding:2px 8px' }, '? ' + t2('install_hint'));
+    hintsBtn.addEventListener('click', () => {
+      if (card.querySelector('.install-hints')) return;
+      card.append(V.h('div', { class: 'install-hints' },
+        V.h('p', { class: 'msub' }, '📱 ' + t2('install_hint_android')),
+        V.h('p', { class: 'msub' }, '🍏 ' + t2('install_hint_ios')),
+        V.h('p', { class: 'msub' }, '💻 ' + t2('install_hint_desktop'))));
+    });
+    card.insertBefore(hintsBtn, card.querySelector('.install-go'));
+    document.body.appendChild(card);
+  }, 2200); // brief delay so it never blocks first paint
+}
 /* per-location small payload for the Locations list */
 async function prefetch(loc) {
   if (store.data[loc.id] && Date.now() - store.data[loc.id].fetchedAt < REFRESH_MS) return;
@@ -300,6 +355,7 @@ async function boot() {
     renderLoading();
     openSearch(); // immediate non-blocking fallback — PRD acceptance 1
   }
+  maybeShowInstall(); // first-visit "install the app" popup (PWA)
 }
 async function guessName(lat, lon) {
   // nearest well-known place via a coarse geocode by coordinates is not supported by

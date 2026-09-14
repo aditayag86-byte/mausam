@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 32 32" role="img" aria-label="Mausam — weather app icon">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6FA9D8"/>
+      <stop offset="1" stop-color="#DCE8F0"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" fill="url(#sky)"/>
+  <g fill="#FFFFFF" opacity="0.9">
+    <ellipse cx="7.4" cy="7" rx="6" ry="4.2"/>
+    <ellipse cx="25.5" cy="25" rx="7" ry="4.5"/>
+  </g>
+  <g stroke="#F2B63F" stroke-width="1.4" stroke-linecap="square" opacity="0.9">
+    <path d="M20.5 13.5 l6.2 0 M20.5 13.5 l-6.2 0 M20.5 13.5 l0 6.2 M20.5 13.5 l0 -6.2 M20.5 13.5 l4.4 4.4 M20.5 13.5 l-4.4 4.4 M20.5 13.5 l4.4 -4.4 M20.5 13.5 l-4.4 -4.4"/>
+  </g>
+  <circle cx="20.5" cy="13.5" r="6.4" fill="#FFD75E"/>
+</svg>

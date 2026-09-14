@@ -66,6 +66,10 @@ Key implementation notes:
   "location wall time" (`Date.now() + utc_offset_seconds`) and formats with UTC getters, so an
   NRI checking weather back home sees correct local times regardless of device timezone.
 - **Viewed-location theming**: day/night + condition come from the *viewed* location, not the device.
+- **PWA installable**: `manifest.json` + generated icons (`assets/icon-{192,512}.png`, `icon.svg`) make Mausam
+  installable to the home screen; a first-visit install popup (`js/app.js → maybeShowInstall`) shows
+  platform-specific steps (Android ⋮ / iOS Share → Add to Home Screen / desktop Chrome ⋮), auto-hides
+  when already installed, and remembers dismissal.
 - **Accessibility**: keyboard-operable everything with visible focus, `prefers-reduced-motion`
   disables all ambient animation, AQI/UV/alert bands always carry text labels, alerts are never
   colour-alone.

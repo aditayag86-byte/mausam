@@ -74,6 +74,16 @@ export const STRINGS = {
     moon_new: 'New moon', moon_waxc: 'Waxing crescent', moon_fq: 'First quarter', moon_waxg: 'Waxing gibbous',
     moon_full: 'Full moon', moon_wang: 'Waning gibbous', moon_lq: 'Last quarter', moon_wanc: 'Waning crescent',
     map_search_ph: 'Jump to a place…',
+    install_title: 'Install Mausam',
+    install_desc: 'Add it to your home screen — full app experience, works even with patchy network, no browser tabs.',
+    install_btn: 'Install app',
+    install_later: 'Not now',
+    install_hint: 'How to install?',
+    install_hint_android: 'Android/Chrome: ⋮ menu → “Install app”',
+    install_hint_ios: 'iPhone/iPad: Share → “Add to Home Screen”',
+    install_hint_desktop: 'Desktop Chrome: ⋮ → “Save and Share” → “Install page as app”',
+    install_done: 'Installed — Mausam now lives on your home screen!',
+    install_note: 'You can also install anytime from the browser’s ⋮ menu.',
   },
 };
 
@@ -150,6 +160,16 @@ STRINGS.hi = {
   moon_new: 'अमावस्या', moon_waxc: 'बढ़ती कला', moon_fq: 'अष्टमी चाँद', moon_waxg: 'बढ़ता गिब्बस',
   moon_full: 'पूर्णिमा', moon_wang: 'घटता गिब्बस', moon_lq: 'अंतिम चाँद', moon_wanc: 'घटती कला',
   map_search_ph: 'किसी जगह पर जाएँ…',
+  install_title: 'Mausam इंस्टॉल करें',
+  install_desc: 'इसे अपनी होम स्क्रीन पर जोड़ें — पूरा एप अनुभव, कमज़ोर नेटवर्क पर भी चले, ब्राउज़र टैब की ज़रूरत नहीं।',
+  install_btn: 'इंस्टॉल करें',
+  install_later: 'बाद में',
+  install_hint: 'कैसे इंस्टॉल करें?',
+  install_hint_android: 'Android/Chrome: ⋮ मेन्यू → “Install app”',
+  install_hint_ios: 'iPhone/iPad: Share → “Add to Home Screen”',
+  install_hint_desktop: 'डेस्कटॉप Chrome: ⋮ → “Save and Share” → “Install page as app”',
+  install_done: 'इंस्टॉल हो गया — Mausam अब आपकी होम स्क्रीन पर है!',
+  install_note: 'कभी भी ब्राउज़र के ⋮ मेन्यू से इंस्टॉल कर सकते हैं।',
 };
 
 export function makeT(lang) {
