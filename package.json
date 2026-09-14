@@ -1,0 +1,13 @@
+{
+  "name": "mausam",
+  "version": "1.0.0",
+  "description": "Mausam — a nationwide weather app for India (living skies, CPCB AQI, IMD-style alerts, monsoon tracking)",
+  "type": "module",
+  "scripts": {
+    "start": "npx -y http-server -p 8123 -c-1 .",
+    "test": "node test/api-test.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.10.0"
+  }
+}

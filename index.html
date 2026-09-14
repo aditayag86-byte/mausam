@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Mausam · मौसम — Weather for all of India</title>
+<meta name="description" content="Mausam — the most complete weather app for India. Living skies, CPCB air quality, IMD-style alerts, monsoon tracking, nationwide map." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230B1030'/%3E%3Crect x='5' y='5' width='6' height='6' fill='%23FFD75E'/%3E%3Crect x='7' y='1' width='2' height='2' fill='%23FFD75E'/%3E%3Crect x='7' y='13' width='2' height='2' fill='%23FFD75E'/%3E%3Crect x='1' y='7' width='2' height='2' fill='%23FFD75E'/%3E%3Crect x='13' y='7' width='2' height='2' fill='%23FFD75E'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+
+<div id="app" data-view="today">
+  <aside id="sidenav" aria-label="Primary">
+    <div class="brand"><span class="brand-dev">मौसम</span><span class="brand-lat">MAUSAM</span></div>
+    <nav class="navrail" role="tablist">
+      <a href="#/today" class="navitem" data-nav="today" role="tab"><span class="nico" aria-hidden="true">☀</span><span class="nlbl" data-i18n="nav_today">Today</span></a>
+      <a href="#/forecast" class="navitem" data-nav="forecast" role="tab"><span class="nico" aria-hidden="true">▦</span><span class="nlbl" data-i18n="nav_forecast">Forecast</span></a>
+      <a href="#/map" class="navitem" data-nav="map" role="tab"><span class="nico" aria-hidden="true">⌖</span><span class="nlbl" data-i18n="nav_map">Map</span></a>
+      <a href="#/air" class="navitem" data-nav="air" role="tab"><span class="nico" aria-hidden="true">◍</span><span class="nlbl" data-i18n="nav_air">Air &amp; UV</span></a>
+      <a href="#/locations" class="navitem" data-nav="locations" role="tab"><span class="nico" aria-hidden="true">≡</span><span class="nlbl" data-i18n="nav_locations">Locations</span></a>
+    </nav>
+    <div class="side-foot">Open-Meteo · CAMS<br />Data for India 🇮🇳</div>
+  </aside>
+
+  <div id="maincol">
+    <header id="topbar">
+      <button id="loc-btn" class="locbtn" aria-haspopup="dialog">
+        <span class="pin" aria-hidden="true">◉</span>
+        <span id="loc-name">…</span>
+        <span id="loc-temp">--°</span>
+      </button>
+      <div class="topctl">
+        <button id="unit-btn" class="pillbtn" aria-label="Toggle units">°C</button>
+        <button id="lang-btn" class="pillbtn" aria-label="Switch language">हिं</button>
+        <button id="refresh-btn" class="pillbtn" aria-label="Refresh" data-i18n-aria="refresh">↻</button>
+      </div>
+    </header>
+
+    <div id="stale-bar" hidden>
+      <span id="stale-msg"></span>
+      <button id="stale-retry" data-i18n="retry">Retry</button>
+    </div>
+
+    <main id="view" tabindex="-1"></main>
+
+    <footer id="attr">Weather &amp; air-quality data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (forecast) · <a href="https://lopen.eu/cams/" target="_blank" rel="noopener">CAMS Ensemble</a> (air quality) · Map tiles © OpenStreetMap contributors, © CARTO</footer>
+  </div>
+
+  <nav id="bottomnav" aria-label="Primary">
+    <a href="#/today" class="navitem" data-nav="today"><span class="nico" aria-hidden="true">☀</span><span class="nlbl" data-i18n="nav_today">Today</span></a>
+    <a href="#/forecast" class="navitem" data-nav="forecast"><span class="nico" aria-hidden="true">▦</span><span class="nlbl" data-i18n="nav_forecast">Forecast</span></a>
+    <a href="#/map" class="navitem" data-nav="map"><span class="nico" aria-hidden="true">⌖</span><span class="nlbl" data-i18n="nav_map">Map</span></a>
+    <a href="#/air" class="navitem" data-nav="air"><span class="nico" aria-hidden="true">◍</span><span class="nlbl" data-i18n="nav_air">Air &amp; UV</span></a>
+    <a href="#/locations" class="navitem" data-nav="locations"><span class="nico" aria-hidden="true">≡</span><span class="nlbl" data-i18n="nav_locations">Places</span></a>
+  </nav>
+</div>
+
+<div id="search-overlay" role="dialog" aria-modal="true" aria-label="Search location" hidden>
+  <div class="search-panel">
+    <div class="search-row">
+      <input id="search-input" type="search" autocomplete="off" placeholder="Search any city, town or district in India…" />
+      <button id="search-close" aria-label="Close search">✕</button>
+    </div>
+    <ul id="search-results" role="listbox"></ul>
+    <div id="search-hint" class="search-hint"></div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
